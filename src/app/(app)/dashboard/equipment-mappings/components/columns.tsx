@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { EditButton } from "@/modules/shared/EditButton";
+import { Pathname } from "@/modules/shared/Pathname";
 import { EquipmentsMappingData } from "@/schema/equipmentmapping";
 import { ColumnDef } from "@tanstack/react-table";
 // import Link from "next/link";
@@ -21,21 +23,42 @@ export const columns: ColumnDef<EquipmentsMappingData>[] = [
     },
     {
         accessorKey: "dateTime",
-        header : "Date Time",
+        header: () => (
+          <div className="flex justify-center">
+            <h1>Date Time</h1>
+          </div>
+        ),
+        cell: (info) => {
+          return <div className="flex justify-center">{info.row.original.dateTime}</div>;
+        },
     },
      {
 
         accessorKey : "equipmentId",
-        header : "Equipment Id",
+        header: () => (
+          <div className="flex justify-center">
+            <h1>Equipment Id</h1>
+          </div>
+        ),
+        cell: (info) => {
+          return <div className="flex justify-center">{info.row.original.equipmentId}</div>;
+        },
      },
      {
         accessorKey : "employeeId",
-        header : "Employee Id",
+        header: () => (
+          <div className="flex justify-center">
+            <h1>Employee Id</h1>
+          </div>
+        ),
+        cell: (info) => {
+          return <div className="flex justify-center">{info.row.original.employeeId}</div>;
+        },
      },
      {
         accessorKey: "actions",
         header: () => (
-          <div className="flex justify-center ">
+          <div className="flex justify-center">
             <h1>Actions</h1>
           </div>
         ),
@@ -44,14 +67,12 @@ export const columns: ColumnDef<EquipmentsMappingData>[] = [
           // const basePath = pathname.includes("patient-tests")
           //   ? pathname
           //   : pathname + "/patient-tests/";
-            // const patientTests = row.original;
+          const basepath=Pathname({prop:"equipment-mappings"});
+          const equipmentMappings=row.original;
     
             return (
-                <div>
-                    <Button variant={"link"} asChild>
-                        {/* <Link href={basePath + "/" + patientTests.id}>Edit</Link>  */}
-                        Edit
-                    </Button>
+                <div className="flex flex-row justify-center">
+                    <EditButton prop={{id:equipmentMappings.id}} basePath={basepath}/>
                     <Button 
                         // onClick={() => deletePatientTestsAction(patientTests.id)}
                         variant={"destructive"}

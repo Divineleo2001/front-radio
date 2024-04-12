@@ -1,5 +1,5 @@
 import Loading from "@/app/loading";
-import RankList from "@/modules/ranks/RankList";
+
 import { RankData, TransformRankData } from "@/schema/ranks";
 import { ServiceData } from "@/schema/services";
 
@@ -7,6 +7,7 @@ import { getRanks } from "@/server_actions/(get-requests)/getRanks";
 import { getServices } from "@/server_actions/(get-requests)/getServices";
 import React from "react";
 import { Suspense } from "react";
+import RankList from "./components/RankList";
 
 export default async function RanksPage() {
   return (
@@ -51,7 +52,7 @@ const Ranks = async () => {
     <Suspense fallback={<Loading />}>
       {/* getting the data for the services and ranks for and displaying it in the form a table for the ranks */}
       {/* <RankList ranks={ranks} services={services} /> */}
-      <h1>Ranks</h1>
+      
       <RankList ranks={transformedRanks} services={services} />
     </Suspense>
   );
